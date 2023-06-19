@@ -6,7 +6,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>Create Product</h1>
+    <h1>Create Employee</h1>
 
     <form action="" method="post" class="form-container">
       <div class="form-group">
