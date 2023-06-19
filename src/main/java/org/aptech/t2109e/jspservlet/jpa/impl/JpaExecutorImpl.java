@@ -35,8 +35,8 @@ public class JpaExecutorImpl<T> implements JpaExecutor<T> {
         try {
             while (rs.next()) {
                 T entity = clazz.getDeclaredConstructor().newInstance();
+                System.err.println(entity.getClass().getDeclaredFields());
                 for (Field f : entity.getClass().getDeclaredFields()) {
-                    System.out.println("Ok1");
                     String columnName;
                     if (f.isAnnotationPresent(Column.class) && !StringUtils.isEmpty(f.getAnnotation(Column.class).name())) {
                         Column columnInfo = f.getAnnotation(Column.class);
@@ -57,7 +57,6 @@ public class JpaExecutorImpl<T> implements JpaExecutor<T> {
                                 break;
                             case DATE:
                                 f.set(entity, rs.getString(columnName));
-                                System.out.printf("OK");
                                 break;
                             case FLOAT:
                                 f.set(entity, rs.getFloat(columnName));
@@ -67,7 +66,6 @@ public class JpaExecutorImpl<T> implements JpaExecutor<T> {
                                 break;
                         }
                     }
-                    System.out.printf("Ok");
                     if (f.isAnnotationPresent(Id.class) && !StringUtils.isEmpty(f.getAnnotation(Id.class).name())) {
                         Id id = f.getAnnotation(Id.class);
                         f.setAccessible(true);
@@ -78,6 +76,7 @@ public class JpaExecutorImpl<T> implements JpaExecutor<T> {
             }
         } catch (SQLException | NoSuchMethodException | InstantiationException | IllegalAccessException |
                  InvocationTargetException e) {
+            System.err.println(e.getMessage());
             System.err.println(e.getMessage());
             throw new RuntimeException(e.getMessage());
         }

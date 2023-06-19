@@ -9,14 +9,13 @@ import org.aptech.t2109e.jspservlet.annotation.Entity;
 import org.aptech.t2109e.jspservlet.annotation.Id;
 import org.aptech.t2109e.jspservlet.common.SqlDataType;
 
-import java.util.Date;
 
 @Data
 @Getter
 @Setter
 @Entity(tableName = "employee")
 public class Employee{
-
+    public Employee(){}
     public Employee(String fullName, String birthday, String address, String position, String department) {
         this.fullName = fullName;
         this.birthday = birthday;
